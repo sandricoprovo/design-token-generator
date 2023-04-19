@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"sandricoprovo/design-token-builder/builders"
 	"sandricoprovo/design-token-builder/structs"
+	"sandricoprovo/design-token-builder/utils"
 )
 
 func main() {
@@ -15,11 +15,23 @@ func main() {
 		Large: 5,
 	}
 
-	typeScale, err := builders.GenerateTypeScale(scale, steps, base)
-
-	if err != nil {
-		log.Fatal(err)
+	typeScale, scaleGeneratorErr := builders.GenerateTypeScale(scale, steps, base)
+	if scaleGeneratorErr != nil {
+		log.Fatal(scaleGeneratorErr)
 	}
 
-	fmt.Println(typeScale)
+	typeScaleCssString, scaleToStringErr := utils.ConvertTypeScaleToString(typeScale)
+	if scaleToStringErr != nil {
+		log.Fatal(scaleToStringErr)
+	}
+
+	cssBlocks := structs.CSSBlocks{
+		FontScale: structs.TypeScale{
+			Base: base,
+			Scale: scale,
+			CSS: typeScaleCssString,
+		},
+	}
+
+	builders.CreateGlobalCSS(cssBlocks)
 }
