@@ -8,6 +8,7 @@ import (
 
 var scale = 1.414
 var base = 16
+var shrink = 0.6
 
 func TestTypeScaleBuilder(t *testing.T) {
 	t.Run("should return a valid 1.414 type scale with 7 steps", func (t *testing.T) {
@@ -17,7 +18,7 @@ func TestTypeScaleBuilder(t *testing.T) {
 		}
 		var correctScale = []float64{8, 11.32, 16, 22.62, 31.99, 45.23, 63.96, 90.44}
 
-		typeScale, err := GenerateTypeScale(scale, steps, base)
+		typeScale, err := BuildTypeScale(scale, steps, base, shrink)
 
 		if err != nil {
 			t.Fatalf("An error occurred while generating the type scale.")
@@ -35,7 +36,7 @@ func TestTypeScaleBuilder(t *testing.T) {
 			Large: 0,
 		}
 
-		_, err := GenerateTypeScale(scale, steps, base)
+		_, err := BuildTypeScale(scale, steps, base, shrink)
 
 		if err == nil {
 			t.Fatalf("The generated type scale is not empty")

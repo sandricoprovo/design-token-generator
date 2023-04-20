@@ -2,8 +2,10 @@ package structs
 
 type TypeScale struct {
 	Base int
-	Scale float64
-	CSS string
+	Multiplier float64
+	Shrink float64
+	Scale string
+	Clamps string
 }
 
 type CSSBlocks struct {

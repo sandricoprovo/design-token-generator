@@ -17,13 +17,23 @@ func CreateGlobalCSS(pieces structs.CSSBlocks) {
 	defer file.Close()
 
 	template, templateErr := template.New("GlobalCSSFile").Parse(`
+/*
+	Generated Global CSS File
+	Generator built in Go by Sandrico Provo https://www.sandricoprovo.dev/
+*/
+
 		:root {
 			/* === TYPOGRAPHY === */
-			/* Scale */
-			--scale: {{.FontScale.Scale}};
-			{{.FontScale.CSS}}
+			/* Config */
+			--scale: {{.FontScale.Multiplier}};
+			--shrink: {{.FontScale.Shrink}};
 
+			/* Scale */
+			{{.FontScale.Scale}}
+
+			/* NOTE: The vw unit used within the clamps below is a placeholder, so please tweak as needed for your use case. */
 			/* Clamps */
+			{{.FontScale.Clamps}}
 		};
 	`)
 	if templateErr != nil {
