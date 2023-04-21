@@ -1,4 +1,4 @@
-module sandricoprovo/design-token-builder
+module sandricoprovo/denoken
 
 go 1.19
 

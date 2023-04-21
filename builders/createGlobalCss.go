@@ -3,7 +3,7 @@ package builders
 import (
 	"fmt"
 	"os"
-	"sandricoprovo/design-token-builder/structs"
+	"sandricoprovo/denoken/structs"
 	"text/template"
 )
 
@@ -18,8 +18,8 @@ func CreateGlobalCSS(pieces structs.CSSBlocks) {
 
 	template, templateErr := template.New("GlobalCSSFile").Parse(`
 /*
-	Generated Global CSS File
-	Generator built in Go by Sandrico Provo https://www.sandricoprovo.dev/
+	Denoken - CSS Design Token Generator
+	Built by Sandrico Provo https://www.sandricoprovo.dev/
 */
 
 		:root {

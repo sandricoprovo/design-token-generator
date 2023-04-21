@@ -3,8 +3,8 @@ package builders
 import (
 	"errors"
 	"fmt"
-	"sandricoprovo/design-token-builder/structs"
-	"sandricoprovo/design-token-builder/utils"
+	"sandricoprovo/denoken/structs"
+	"sandricoprovo/denoken/utils"
 	"sort"
 )
 

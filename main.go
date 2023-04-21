@@ -3,14 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
-	"sandricoprovo/design-token-builder/builders"
-	"sandricoprovo/design-token-builder/structs"
-	"sandricoprovo/design-token-builder/utils"
+	"sandricoprovo/denoken/builders"
+	"sandricoprovo/denoken/structs"
+	"sandricoprovo/denoken/utils"
 )
 
 func main() {
 	// TODO:
-	// - Rename project to Denoken
 	// - Convert type scale to use rems optionally
 
 	// Loads config file settings

@@ -2,7 +2,7 @@ package builders
 
 import (
 	"reflect"
-	"sandricoprovo/design-token-builder/structs"
+	"sandricoprovo/denoken/structs"
 	"testing"
 )
 
