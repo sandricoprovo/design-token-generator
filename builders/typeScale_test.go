@@ -10,6 +10,7 @@ var scale = 1.414
 var base = 16
 var shrink = 0.6
 
+// TODO: Fix this test
 func TestTypeScaleBuilder(t *testing.T) {
 	t.Run("should return a valid 1.414 type scale with 7 steps", func (t *testing.T) {
 		var steps = structs.Steps{

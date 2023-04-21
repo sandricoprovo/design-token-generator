@@ -1,30 +1,32 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"sandricoprovo/design-token-builder/builders"
 	"sandricoprovo/design-token-builder/structs"
+	"sandricoprovo/design-token-builder/utils"
 )
 
 func main() {
 	// TODO:
-	// - Update these so they can ge picked up from a '.designtokenrc' file, allowing the config to be shared if needed. This isn't really needed, but it'll be fun!
+	// - Rename project to Denoken
 	// - Convert type scale to use rems optionally
-	scale := 1.414
-	base := 16
-	fontShrink := 0.8
-	steps := structs.Steps{
-		Small: 2,
-		Large: 5,
+
+	// Loads config file settings
+	config, err := utils.LoadConfig()
+	if err != nil {
+		fmt.Println(err)
 	}
 
-	typeScale, scaleGeneratorErr := builders.BuildTypeScale(scale, steps, base, fontShrink)
+	// Builds the type scale struct to be used for generating this block of css
+	typeScale, scaleGeneratorErr := builders.BuildTypeScale(config.TypeScale)
 	if scaleGeneratorErr != nil {
 		log.Fatal(scaleGeneratorErr)
 	}
 
 	cssBlocks := structs.CSSBlocks{
-		FontScale: typeScale,
+		TypeScale: typeScale,
 	}
 
 	builders.CreateGlobalCSS(cssBlocks)

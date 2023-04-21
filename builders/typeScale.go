@@ -96,29 +96,26 @@ func generateCssClamps(scale []float64, base int) (string, error) {
 	return clampsBlockString, nil
 }
 
-func BuildTypeScale(scale float64, steps structs.Steps, baseFontSize int, shrink float64) (structs.TypeScale, error) {
-	typeScale := structs.TypeScale{
-		Base: baseFontSize,
-		Multiplier: scale,
-		Shrink: shrink,
-		Scale: "",
-		Clamps: "",
+func BuildTypeScale(typeScaleConfig structs.TypeScaleConfig) (structs.TypeScale, error) {
+	baseSize := typeScaleConfig.Base
+	scaleMultiplier := typeScaleConfig.Multiplier
+	fontShrink := typeScaleConfig.Shrink
+	scaleSteps := typeScaleConfig.Steps
+
+	if scaleSteps.Small == 0 && scaleSteps.Large == 0 {
+		return structs.TypeScale{}, errors.New("the small and large steps can't both be zero")
 	}
 
-	if steps.Large == 0 && steps.Small == 0 {
-		return typeScale, errors.New("the small and large steps can't both be zero")
-	}
+	initialScale := []float64{float64(baseSize)}
 
-	initialScale := []float64{float64(baseFontSize)}
-
-	belowBaseSizes, belowSizeErr := generateSmallFontSizes(scale, baseFontSize, steps.Small)
+	belowBaseSizes, belowSizeErr := generateSmallFontSizes(scaleMultiplier, baseSize, scaleSteps.Small)
 	if belowSizeErr != nil {
-		return typeScale, belowSizeErr
+		return structs.TypeScale{}, belowSizeErr
 	}
 
-	largerBaseSizes, largeSizeError := generateLargeFontSizes(scale, baseFontSize, steps.Large)
+	largerBaseSizes, largeSizeError := generateLargeFontSizes(scaleMultiplier, baseSize, scaleSteps.Large)
 	if largeSizeError != nil {
-		return typeScale, largeSizeError
+		return structs.TypeScale{}, largeSizeError
 	}
 
 	// Concats the three slices and sorts then in ascending order
@@ -135,17 +132,23 @@ func BuildTypeScale(scale float64, steps structs.Steps, baseFontSize int, shrink
 	// Creates the type scale string to be added to the css file
 	scaleCssBlock, scaleToStringErr := convertTypeScaleToString(fontScale)
 	if scaleToStringErr != nil {
-		return typeScale, scaleToStringErr
+		return structs.TypeScale{}, scaleToStringErr
 	}
 
 	// Creates the css clamps based on the type scale
-	clampsCssBlock, clampsErr := generateCssClamps(fontScale, baseFontSize)
+	clampsCssBlock, clampsErr := generateCssClamps(fontScale, baseSize)
 	if clampsErr != nil {
-		return typeScale, clampsErr
+		return structs.TypeScale{}, clampsErr
 	}
 
-	typeScale.Scale = scaleCssBlock
-	typeScale.Clamps = clampsCssBlock
+	// Forms the returned typeScale struct
+	typeScale := structs.TypeScale{
+		Base: baseSize,
+		Multiplier: scaleMultiplier,
+		Shrink: fontShrink,
+		Scale: scaleCssBlock,
+		Clamps: clampsCssBlock,
+	}
 
 	return typeScale, nil;
 }

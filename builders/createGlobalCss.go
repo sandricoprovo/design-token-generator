@@ -25,15 +25,15 @@ func CreateGlobalCSS(pieces structs.CSSBlocks) {
 		:root {
 			/* === TYPOGRAPHY === */
 			/* Config */
-			--scale: {{.FontScale.Multiplier}};
-			--shrink: {{.FontScale.Shrink}};
+			--scale: {{.TypeScale.Multiplier}};
+			--shrink: {{.TypeScale.Shrink}};
 
 			/* Scale */
-			{{.FontScale.Scale}}
+			{{.TypeScale.Scale}}
 
 			/* NOTE: The vw unit used within the clamps below is a placeholder, so please tweak as needed for your use case. */
 			/* Clamps */
-			{{.FontScale.Clamps}}
+			{{.TypeScale.Clamps}}
 		};
 	`)
 	if templateErr != nil {
