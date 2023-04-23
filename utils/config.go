@@ -7,15 +7,13 @@ import (
 )
 
 type Config struct {
+	Path string `mapstructure:"path"`
 	TypeScale structs.TypeScaleConfig `mapstructure:"typeScale"`
 }
 
 func LoadConfig() (Config, error) {
 	var config Config
 	vp := viper.New()
-
-
-	// TODO: update config to work with a save path. this'll mean users don't have to constantly have to drag the file into a folder of their choice
 
 	// Finds the config file
 	vp.SetConfigName("denoken.config")
