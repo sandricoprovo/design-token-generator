@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"fmt"
+	"os"
 	"sandricoprovo/denoken/structs"
 	"testing"
 )
@@ -23,8 +23,39 @@ func TestCreateGlobalCssFile(t *testing.T) {
 		createFileErr := CreateGlobalCssFile(cssBlocks, path)
 
 		if createFileErr == nil {
-			fmt.Println("The returned error should be populated when passed an empty path.")
 			t.Fail()
 		}
+	})
+
+	t.Run("should return error if path is has many characters but does not contain a file extension", func(t *testing.T) {
+		var path = "   "
+		createFileErr := CreateGlobalCssFile(cssBlocks, path)
+
+		if createFileErr == nil {
+			t.Fail()
+		}
+	})
+
+	t.Run("should create css file within folder", func(t *testing.T) {
+		var path = "styles/global.css"
+		createFileErr := CreateGlobalCssFile(cssBlocks, path)
+
+		if createFileErr != nil {
+			t.Fail()
+		}
+
+		os.Remove("./styles/global.css")
+		os.Remove("./styles/")
+	})
+
+	t.Run("should create css file at root of project", func(t *testing.T) {
+		var path = "global.css"
+		createFileErr := CreateGlobalCssFile(cssBlocks, path)
+
+		if createFileErr != nil {
+			t.Fail()
+		}
+
+		os.Remove("./global.css")
 	})
 }

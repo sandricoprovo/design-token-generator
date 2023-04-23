@@ -38,7 +38,7 @@ func createFileAtPath(path string) (error) {
 }
 
 func CreateGlobalCssFile(pieces structs.CSSBlocks, path string) (error) {
-	if path == "" {
+	if path == "" || !strings.Contains(path, ".css"){
 		return errors.New("a valid path is needed to create the css file. please set a valid path")
 	}
 
