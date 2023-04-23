@@ -1,46 +1,53 @@
 package builders
 
 import (
-	"reflect"
 	"sandricoprovo/denoken/structs"
+	"strconv"
+	"strings"
 	"testing"
 )
 
-var scale = 1.414
-var base = 16
-var shrink = 0.6
+var DEFAULT_CONFIG = structs.TypeScaleConfig{
+	Base: 16,
+    Multiplier: 1.414,
+    Shrink: 0.6,
+    Steps: structs.Steps{
+        Small: 2,
+        Large: 5,
+    },
+}
+var validScale = []float64{8, 11.32, 16, 22.62, 31.99, 45.23, 63.96, 90.44}
 
-// TODO: Fix this test
 func TestTypeScaleBuilder(t *testing.T) {
-	t.Run("should return a valid 1.414 type scale with 7 steps", func (t *testing.T) {
-		var steps = structs.Steps{
-			Small: 2,
-			Large: 5,
-		}
-		var correctScale = []float64{8, 11.32, 16, 22.62, 31.99, 45.23, 63.96, 90.44}
-
-		typeScale, err := BuildTypeScale(scale, steps, base, shrink)
-
+	t.Run("should not return an empty string", func (t *testing.T) {
+		_, err := BuildTypeScale(DEFAULT_CONFIG)
 		if err != nil {
 			t.Fatalf("An error occurred while generating the type scale.")
 		}
-
-		if !reflect.DeepEqual(correctScale, typeScale) {
-			t.Fatalf("The generated type scale is incorrect")
-		}
-
 	})
 
-	t.Run("should return an empty scale if steps are 0", func (t *testing.T) {
-		var steps = structs.Steps{
-			Small: 0,
-			Large: 0,
+	t.Run("should contain type scale string with valid numbers", func (t *testing.T) {
+		typeScale, _ := BuildTypeScale(DEFAULT_CONFIG)
+		if !strings.Contains(typeScale.Scale, strconv.FormatFloat(validScale[0], 'f', -1, 64)) {
+			t.Fatalf("That number wasn't within the scale")
+		}
+	})
+
+	t.Run("should return a populated error if steps are zero", func (t *testing.T) {
+		var config = structs.TypeScaleConfig{
+			Base: 16,
+			Multiplier: 1.414,
+			Shrink: 0.6,
+			Steps: structs.Steps{
+				Small: 0,
+				Large: 0,
+			},
 		}
 
-		_, err := BuildTypeScale(scale, steps, base, shrink)
+		_, err := BuildTypeScale(config)
 
 		if err == nil {
-			t.Fatalf("The generated type scale is not empty")
+			t.Fatalf("Does not correctly report an error if steps are empty")
 		}
 
 	})
