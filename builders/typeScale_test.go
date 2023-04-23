@@ -49,6 +49,41 @@ func TestTypeScaleBuilder(t *testing.T) {
 		if err == nil {
 			t.Fatalf("Does not correctly report an error if steps are empty")
 		}
+	})
 
+	t.Run("should return no font sizes smaller than base", func (t *testing.T) {
+		var config = structs.TypeScaleConfig{
+			Base: 16,
+			Multiplier: 1.414,
+			Shrink: 0.6,
+			Steps: structs.Steps{
+				Small: 0,
+				Large: 5,
+			},
+		}
+
+		typeScale, err := BuildTypeScale(config)
+
+		if err != nil || strings.Contains(typeScale.Scale, "8") {
+			t.Fail()
+		}
+	})
+
+	t.Run("should return no font sizes larger than base", func (t *testing.T) {
+		var config = structs.TypeScaleConfig{
+			Base: 16,
+			Multiplier: 1.414,
+			Shrink: 0.6,
+			Steps: structs.Steps{
+				Small: 2,
+				Large: 0,
+			},
+		}
+
+		typeScale, err := BuildTypeScale(config)
+
+		if err != nil || strings.Contains(typeScale.Scale, "63.96") {
+			t.Fail()
+		}
 	})
 }
