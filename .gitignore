@@ -24,3 +24,4 @@ go.work
 # Other
 global.css
 denoken.config.json
+./styles
