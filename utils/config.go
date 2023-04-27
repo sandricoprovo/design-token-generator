@@ -7,19 +7,22 @@ import (
 )
 
 type Config struct {
-	Path string `mapstructure:"path"`
+	Path      string                  `mapstructure:"path"`
 	TypeScale structs.TypeScaleConfig `mapstructure:"typeScale"`
 }
 
-func LoadConfig() (Config, error) {
+func LoadConfig(configInfo structs.ConfigPaths) (Config, error) {
 	var config Config
 	vp := viper.New()
 
 	// Finds the config file
-	vp.SetConfigName("denoken.config")
+	vp.SetConfigName(configInfo.File)
 	vp.SetConfigType("json")
-	vp.AddConfigPath(".")
-	vp.AddConfigPath("./config/")
+	// Loops over and adds the default config paths
+	for _, path := range configInfo.Paths {
+		vp.AddConfigPath(path)
+	}
+
 	configErr := vp.ReadInConfig()
 	if configErr != nil {
 		return Config{}, configErr
@@ -32,4 +35,3 @@ func LoadConfig() (Config, error) {
 
 	return config, nil
 }
-

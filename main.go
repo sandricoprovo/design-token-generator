@@ -12,12 +12,16 @@ func main() {
 	// TODO:
 	// - Convert type scale to use rems optionally
 
+	configPaths := structs.ConfigPaths{
+		File:  "denoken.config",
+		Paths: []string{".", "./config/"},
+	}
+
 	// Loads config file settings
-	config, configErr := utils.LoadConfig()
+	config, configErr := utils.LoadConfig(configPaths)
 	if configErr != nil {
 		fmt.Println(configErr)
 	}
-
 	// Builds the type scale struct to be used for generating this block of css
 	typeScale, scaleGeneratorErr := builders.BuildTypeScale(config.TypeScale)
 	if scaleGeneratorErr != nil {
