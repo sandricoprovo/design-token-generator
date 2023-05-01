@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"sandricoprovo/denoken/structs"
+	"github.com/sandricoprovo/denoken/structs"
 	"testing"
 )
 

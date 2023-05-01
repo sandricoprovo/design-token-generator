@@ -1,7 +1,7 @@
 package main
 
 import (
-	"sandricoprovo/denoken/cmd"
+	"github.com/sandricoprovo/denoken/cmd"
 )
 
 func main() {

@@ -3,9 +3,9 @@ package utils
 import (
 	"errors"
 	"fmt"
+	"github.com/sandricoprovo/denoken/structs"
 	"html/template"
 	"os"
-	"sandricoprovo/denoken/structs"
 	"strings"
 )
 

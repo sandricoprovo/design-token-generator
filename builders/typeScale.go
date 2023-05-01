@@ -3,8 +3,8 @@ package builders
 import (
 	"errors"
 	"fmt"
-	"sandricoprovo/denoken/structs"
-	"sandricoprovo/denoken/utils"
+	"github.com/sandricoprovo/denoken/structs"
+	"github.com/sandricoprovo/denoken/utils"
 	"sort"
 )
 

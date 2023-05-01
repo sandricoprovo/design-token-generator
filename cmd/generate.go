@@ -17,10 +17,10 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/sandricoprovo/denoken/builders"
+	"github.com/sandricoprovo/denoken/structs"
+	"github.com/sandricoprovo/denoken/utils"
 	"log"
-	"sandricoprovo/denoken/builders"
-	"sandricoprovo/denoken/structs"
-	"sandricoprovo/denoken/utils"
 
 	"github.com/spf13/cobra"
 )
