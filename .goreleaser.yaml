@@ -22,7 +22,7 @@ brews:
     name: denoken
     homepage: https://github.com/sandricoprovo/homebrew-denoken
     tap:
-      owner: sandricoproco
+      owner: sandricoprovo
       name: homebrew-denoken
     commit_author:
       name: sprovo
