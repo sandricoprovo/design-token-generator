@@ -3,9 +3,10 @@ package builders
 import (
 	"errors"
 	"fmt"
+	"sort"
+
 	"github.com/sandricoprovo/denoken/structs"
 	"github.com/sandricoprovo/denoken/utils"
-	"sort"
 )
 
 func generateSmallFontSizes(scale float64, base int, steps int) ([]float64, error) {
@@ -28,7 +29,7 @@ func generateSmallFontSizes(scale float64, base int, steps int) ([]float64, erro
 	return smallFontSizes, nil
 }
 
-func generateLargeFontSizes[T int | float64](scale float64, base T, steps int) ([]float64, error) {
+func generateLargeFontSizes(scale float64, base float64, steps int) ([]float64, error) {
 	var largeFontSizes []float64
 
 	if steps == 0 {
@@ -113,7 +114,7 @@ func BuildTypeScale(typeScaleConfig structs.TypeScaleConfig) (structs.TypeScale,
 		return structs.TypeScale{}, belowSizeErr
 	}
 
-	largerBaseSizes, largeSizeError := generateLargeFontSizes(scaleMultiplier, baseSize, scaleSteps.Large)
+	largerBaseSizes, largeSizeError := generateLargeFontSizes(scaleMultiplier, float64(baseSize), scaleSteps.Large)
 	if largeSizeError != nil {
 		return structs.TypeScale{}, largeSizeError
 	}
