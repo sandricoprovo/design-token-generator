@@ -20,7 +20,7 @@ universal_binaries:
 brews:
   -
     name: denoken
-    homepage: https://github.com/sandricoprovo/homebrew-denoken
+    homepage: https://github.com/sandricoprovo/denoken
     tap:
       owner: sandricoprovo
       name: homebrew-denoken
