@@ -6,6 +6,7 @@ A simple, config based design token generator.
 
 -   Intel Macs
 -   Apple Silicon Macs
+-   Linux
 
 ## What is Denoken?
 
@@ -37,6 +38,8 @@ To configure denoken create a `denoken.config.json` file in the root of your pro
     }
 }
 ```
+
+You can find an example css file at `/global.example.css` in the root of this repo.
 
 **Options**
 
