@@ -1,4 +1,8 @@
-# Denoken
+# Fran - Previously Denoken
+
+## Fran is undergoing a rebuild, so excuse the mess!
+
+## Old README
 
 A simple, config based design token generator.
 
