@@ -1,9 +1,7 @@
 package main
 
-import (
-	"github.com/sandricoprovo/denoken/cmd"
-)
+import "fmt"
 
 func main() {
-	cmd.Execute()
+	fmt.Println("Hello Fran")
 }
