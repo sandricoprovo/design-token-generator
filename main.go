@@ -1,7 +1,10 @@
+/*
+Copyright © 2024 Sandrico Provo <EMAIL ADDRESS>
+*/
 package main
 
-import "fmt"
+import "github.com/sandricoprovo/fran/cmd"
 
 func main() {
-	fmt.Println("Hello Fran")
+	cmd.Execute()
 }
