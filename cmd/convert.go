@@ -41,7 +41,7 @@ var convertCmd = &cobra.Command{
 }
 
 func init() {
-	convertCmd.Flags().StringVarP(&format, "format", "f", "hex", "Convert hex to different color formats.")
+	convertCmd.Flags().StringVarP(&format, "format", "f", "hex", "Format to convert too.")
 	convertCmd.Flags().StringVarP(&path, "path", "p", "", "Path to css file.")
 
 	rootCmd.AddCommand(convertCmd)
