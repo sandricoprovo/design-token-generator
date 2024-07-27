@@ -1,71 +1,32 @@
-# Fran - Previously Denoken
+Fran is undergoing a rebuild, so excuse the mess!
 
-## Fran is undergoing a rebuild, so excuse the mess!
+# Fran CLI
 
-## Old README
+## About the Project
 
-A simple, config based design token generator.
+Fran is a CLI tool built in Go with the goal of making it easier to generate and update design tokens in our front end projects. The problem Fran tries to solve is enabling you to create tokens and make updates without having to reach for multiple third party web apps/services. They're great, but sometime it's nice to stay on the command line.
 
-#### Works On
-
--   Intel Macs
--   Apple Silicon Macs
--   Linux
-
-## What is Denoken?
-
-Denoken is a css file generator that builds out parts of a design system you'd use in a project. By using a simple `JSON` config file you can set the parameters that'll generate fleshed out parts of a system for you, instead of doing a lot of the work manually each time you start a project. For now, denoken has a single `generate` command that generates a css file containing font variables which you can then use within your project.
+For an example use case, lets say you have 25 hex colours you want to convert to rgb. Maybe your editor has a built in color changer like VScode, or you know a good web app. Instead of copying and pasting or changing each color one by one, Fran can walk your file(s) and convert those colour codes in one command.
 
 ## How to Install
 
-Install denoken via the homebrew command below.
-
-```
-brew install denoken
-```
-
-## Configuration
-
-To configure denoken create a `denoken.config.json` file in the root of your project, or within a `/config` folder at the root. An example config looks like this:
-
-```json
-{
-    "path": "global.css",
-    "typeScale": {
-        "base": 16,
-        "multiplier": 1.414,
-        "shrink": 0.6,
-        "steps": {
-            "small": 2,
-            "large": 5
-        }
-    }
-}
-```
-
-You can find an example css file at `/global.example.css` in the root of this repo.
-
-**Options**
-
--   `path`: Where the generated css file will be placed when using the `generate` command. You don't need to put a leading `/` in this path, and you can also nest the file in a folder by using a path like `styles/global.css`.
--   `typeScale`: Configuration for generating font variables.
-    -   `base`: The base font size for the type.
-    -   `multiplier`: The scale used to create font sizes from the base.
-    -   `shrink`: Used to calculate the smallest font size in css clamps. Using the example config, fonts will stop getting smaller when they hit 60% of their original size.
-    -   `steps`: The small and large steps tell the generator how many font sizes you want that are smaller and larger than your base size.
-
 ## Commands
 
-These are the commands you can use with Denoken and what they do.
-
-**_Generate_**
-
 ```
-denoken generate
+fran convert
 ```
 
-This command generates your css file at the location of your `denoken.config.json` files' `path` variable . It uses the `typeScale` object within the config to generate a css file with fleshed out font variables using css custom properties and css clamp.
+-   Converts any supported color found in a file or directory to the targeted format.
+    -   Supported colours:
+        -   hex
+        -   rgb
+        -   oklch
+    -   Supported File Types:
+        -   `.css`
+        -   `.scss`
+        -   `.svelte`
+    -   Flags:
+        -   `--format / -f`: _Required_. The target format that other colours will be converted to.
+        -   `--path / -p`: _Optional_. The target file. If this flag is omitted, fran will traverse your entire project directory and convert colours within the supported file formats.
 
-## Why Denoken?
-
-I built denoken because I wanted an easy way to build out all of the starter variables I use when designing my side projects. I always found myself going from web app to web app generating these pieces. For example, most projects I build have some kind of frontend, and so I always went to type-scale.com to get the font sizes and then spend 15-30 minutes building out usable css variables for fonts. My motivation for denoken is to streamline that process down to a config file and a terminal command. Having denoken as a global command installed via homebrew makes it easy to reuse across my projects since it just needs a config file.
+##### Tips - Buy me (or my dog) A Snack 👨🏾‍💻
