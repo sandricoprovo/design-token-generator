@@ -13,7 +13,7 @@ var MAX_RANGE = 255
 
 var Rgb RgbColor
 var RgbParserMap = ParserMap{
-	"lch": Rgb.ToLchString,
+	"oklch": Rgb.ToOklchString,
 }
 
 func (RgbColor) Parse(s string) (int, int, int, error) {
@@ -83,7 +83,7 @@ func (RgbColor) ToLch(s string) (float64, float64, float64, error) {
 	return util.Round(lchL, 2), util.Round(lchC, 3), util.Round(lchH, 2), nil
 }
 
-func (RgbColor) ToLchString(s string) string {
+func (RgbColor) ToOklchString(s string) string {
 	l, c, h, err := Rgb.ToLch(s)
 	if err != nil {
 		util.PanicCheck(err)

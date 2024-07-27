@@ -11,8 +11,8 @@ type HexColor struct{}
 
 var Hex HexColor
 var HexParserMap = ParserMap{
-	"rgb": Hex.ToRgbString,
-	"lch": Hex.ToLchString,
+	"rgb":   Hex.ToRgbString,
+	"oklch": Hex.ToOklchString,
 }
 
 func (HexColor) ToRgb(h string) (int, int, int, error) {
@@ -58,7 +58,7 @@ func (HexColor) ToLch(h string) (float64, float64, float64, error) {
 	return util.Round(lchL, 2), util.Round(lchC, 3), util.Round(lchH, 2), nil
 }
 
-func (HexColor) ToLchString(h string) string {
+func (HexColor) ToOklchString(h string) string {
 	okL, okC, okH, err := Hex.ToLch(h)
 	if err != nil {
 		util.PanicCheck(err)

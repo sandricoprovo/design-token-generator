@@ -5,19 +5,15 @@ import (
 	"testing"
 )
 
-// Mock implementations for utility functions and structs used in HexColor
-
 type MockRgb struct{}
 
 var RgbMock MockRgb
 
 func (MockRgb) ToLinear(value int) float64 {
-	// Mock implementation for testing purposes
 	return float64(value) / 255.0
 }
 
 func (MockRgb) ToLabFromLinear(rl, gl, bl float64) (float64, float64, float64) {
-	// Mock implementation for testing purposes
 	return rl * 100, gl * 100, bl * 100
 }
 
@@ -26,12 +22,10 @@ type MockLab struct{}
 var LabMock MockLab
 
 func (MockLab) ToLch(l, a, b float64) (float64, float64, float64) {
-	// Mock implementation for testing purposes
 	return l, a, b
 }
 
 func (MockLab) ToString(l, c, h float64) string {
-	// Mock implementation for testing purposes
 	return fmt.Sprintf("lch(%.2f, %.3f, %.2f)", l, c, h)
 }
 
@@ -65,7 +59,7 @@ type hexToRgbStringTest struct {
 	expected string
 }
 
-func TestHexColor_ToRgbString(t *testing.T) {
+func TestHexToRgbString(t *testing.T) {
 	tests := []hexToRgbStringTest{
 		{"#ff5733", "rgb(255,87,51)"},
 		{"ff5733", "rgb(255,87,51)"},
@@ -113,13 +107,13 @@ func TestHexToLch(t *testing.T) {
 	}
 }
 
-type hexToLchStringTest struct {
+type hexToOklchStringTest struct {
 	hex      string
 	expected string
 }
 
 func TestHexToLchString(t *testing.T) {
-	tests := []hexToLchStringTest{
+	tests := []hexToOklchStringTest{
 		{"#ff5733", "oklch(68.04% 0.210 33.69)"},
 		{"#000000", "oklch(0.00% 0.000 0.00)"},
 		{"#ffffff", "oklch(100.00% 0.000 89.88)"},
@@ -127,7 +121,7 @@ func TestHexToLchString(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.hex, func(t *testing.T) {
-			result := Hex.ToLchString(test.hex)
+			result := Hex.ToOklchString(test.hex)
 			if result != test.expected {
 				t.Errorf("Expected: %s, got: %s", test.expected, result)
 			}

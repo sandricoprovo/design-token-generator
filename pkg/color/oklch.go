@@ -6,11 +6,11 @@ import (
 	"github.com/sandricoprovo/fran/pkg/util"
 )
 
-type LchColor struct{}
+type OklchColor struct{}
 
-var Lch LchColor
+var Lch OklchColor
 
-func (LchColor) ToString(l, c, h float64) string {
+func (OklchColor) ToString(l, c, h float64) string {
 	if l < 0 || c < 0 || h < 0 {
 		util.PanicCheck(LogColorErr("invalid l,c, or h value passed"))
 	}

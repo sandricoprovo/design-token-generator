@@ -17,7 +17,7 @@ var convertCmd = &cobra.Command{
 	Use:   "convert",
 	Short: "Convert colors to different color formats.",
 	Long: `Convert colors to different color formats. Currently supports converting:
-- lch: from hex
+- oklch: from hex, rgb
 - rgb: from hex
 	`,
 	Args: cobra.MaximumNArgs(1),

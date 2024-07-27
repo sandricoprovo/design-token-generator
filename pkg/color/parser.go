@@ -8,8 +8,6 @@ type ParserMap map[string]func(string) string
 
 // Regexes
 var HEX_REGEX = regexp.MustCompile(`(?i)#(?:[a-f0-9]{3}){1,2}`)
-
-// var RGB_REGEX = regexp.MustCompile(`rgb\(\s*(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\s*,\s*(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\s*,\s*(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\s*\)`)
 var RGB_REGEX = regexp.MustCompile(`rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)`)
 
 var parsers = map[*regexp.Regexp]ParserMap{
